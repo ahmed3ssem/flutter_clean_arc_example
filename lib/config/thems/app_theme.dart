@@ -15,6 +15,7 @@ ThemeData appTheme(){
     ),
     scaffoldBackgroundColor: AppColors.whiteColor,
     textTheme: TextTheme(
+      bodyMedium: const TextStyle(height: 1.3 , fontSize: 22 , color: Colors.white , fontWeight: FontWeight.bold),
       labelLarge: TextStyle(
         fontSize: 16,
         color: AppColors.primary,
