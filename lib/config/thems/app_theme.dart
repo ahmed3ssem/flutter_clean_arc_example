@@ -9,6 +9,10 @@ ThemeData appTheme(){
     hintColor: AppColors.hint,
     fontFamily: AppStrings.fontName,
     brightness: Brightness.light,
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+      titleTextStyle: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold)
+    ),
     scaffoldBackgroundColor: AppColors.whiteColor,
     textTheme: TextTheme(
       labelLarge: TextStyle(

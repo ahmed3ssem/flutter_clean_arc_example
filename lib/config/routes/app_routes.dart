@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_arc_example/features/random_quote/presentation/screens/favourite_quate.dart';
 import 'package:flutter_clean_arc_example/features/random_quote/presentation/screens/quate_screen.dart';
 
 class Routes{
@@ -23,7 +22,7 @@ class AppRoutes{
       case Routes.intialRoutes:
         return MaterialPageRoute(builder: ((context) => const QuateScreen()));
       case Routes.favouriteRoutes:
-        return MaterialPageRoute(builder: ((context) => const FavouriteQuateScreen()));
+        //return MaterialPageRoute(builder: ((context) => const FavouriteQuateScreen()));
       default:
         return null;
     }
