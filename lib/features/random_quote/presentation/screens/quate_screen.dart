@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_arc_example/config/routes/app_routes.dart';
+import 'package:flutter_clean_arc_example/core/utils/app_colors.dart';
 
 class QuateScreen extends StatelessWidget {
   const QuateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("Hi"),
+        child: InkWell(
+          onTap: ()=>Navigator.pushNamed(context, Routes.favouriteRoutes),
+          child: Text("Hi" , style: TextStyle(color: AppColors.primary , fontSize: 16 , fontWeight: FontWeight.w500),),
+        ),
       ),
     );
   }

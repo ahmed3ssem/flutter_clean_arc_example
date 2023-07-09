@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_arc_example/config/routes/app_routes.dart';
 import 'package:flutter_clean_arc_example/config/thems/app_theme.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_strings.dart';
-import 'package:flutter_clean_arc_example/features/random_quote/presentation/screens/quate_screen.dart';
 
 class Quote extends StatelessWidget {
   const Quote({super.key});
@@ -13,7 +13,7 @@ class Quote extends StatelessWidget {
       title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
       theme: appTheme(),
-      home: const QuateScreen()
+      onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }
