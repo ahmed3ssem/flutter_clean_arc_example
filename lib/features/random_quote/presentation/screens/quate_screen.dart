@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_colors.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_strings.dart';
-import 'package:flutter_clean_arc_example/features/random_quote/widget/quate_content.dart';
+import 'package:flutter_clean_arc_example/features/random_quote/presentation/widgets/quate_content.dart';
 
 class QuateScreen extends StatelessWidget {
   const QuateScreen({Key? key}) : super(key: key);
