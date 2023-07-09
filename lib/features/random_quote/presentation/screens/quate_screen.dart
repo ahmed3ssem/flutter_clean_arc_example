@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arc_example/config/routes/app_routes.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_colors.dart';
+import 'package:flutter_clean_arc_example/core/utils/constants.dart';
 
 class QuateScreen extends StatelessWidget {
   const QuateScreen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class QuateScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: InkWell(
-          onTap: ()=>Navigator.pushNamed(context, Routes.favouriteRoutes),
+          onTap: ()=>Constants.showErrorDialog(context: context, msg: 'Error '),
           child: Text("Hi" , style: TextStyle(color: AppColors.primary , fontSize: 16 , fontWeight: FontWeight.w500),),
         ),
       ),
