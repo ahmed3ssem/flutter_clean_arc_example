@@ -19,6 +19,7 @@ class QuoteRepositoryImpl implements QuoteRepository{
     if(await networkInfo.isConnected){
       try{
         final remoteQuote = await remoteDataSource.getRandomQuote();
+        localDataSource.cacheQuote(remoteQuote);
         return Right(remoteQuote);
       } on ServerException{
         return Left(ServerFailure());
