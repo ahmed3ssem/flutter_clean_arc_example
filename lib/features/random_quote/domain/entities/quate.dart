@@ -10,6 +10,6 @@ class Quote extends Equatable{
   const Quote({required this.userId, required this.id, required this.body, required this.title});
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [userId , id , body , title];
 
 }
