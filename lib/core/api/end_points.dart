@@ -1,3 +1,4 @@
 class EndPoints{
-  static const String randomQuote = 'https://jsonplaceholder.typicode.com/posts';
+  static const baseUrl = 'https://jsonplaceholder.typicode.com/';
+  static const String randomQuote = 'posts';
 }

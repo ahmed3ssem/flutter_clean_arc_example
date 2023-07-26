@@ -15,10 +15,10 @@ class RandomQuoteRemoteDataSourceImpl implements RandomQuoteRemoteDataSource{
   RandomQuoteRemoteDataSourceImpl(this.client);
   @override
   Future<QuoteModel> getRandomQuote() async{
-    final remoteQuoteUrl = Uri.parse(EndPoints.randomQuote);
+    final remoteQuoteUrl = Uri.parse(EndPoints.baseUrl+EndPoints.randomQuote);
     final res = await client.get(remoteQuoteUrl);
     if(res.statusCode == 200){
-      return QuoteModel.fromJson(json.decode(res.body));
+      return QuoteModel.fromJson(jsonDecode(res.body)[1]);
     } else {
       throw ServerException();
     }

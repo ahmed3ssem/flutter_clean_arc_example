@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_clean_arc_example/core/api/app_interceptor.dart';
 import 'package:flutter_clean_arc_example/core/network/network_info.dart';
 import 'package:flutter_clean_arc_example/features/random_quote/data/datasources/random_quote_local_data.dart';
 import 'package:flutter_clean_arc_example/features/random_quote/data/datasources/random_quote_remote_data_source.dart';
@@ -32,6 +34,15 @@ Future<void> init() async {
   
   //External
   final sharedPreference = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => AppInterceptor());
+  sl.registerLazySingleton(() => LogInterceptor(
+    error: true,
+    request: true,
+    requestBody: true,
+    requestHeader: true,
+    responseBody: true,
+    responseHeader: true
+  ));
   sl.registerLazySingleton(() => sharedPreference);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => InternetConnectionChecker());
