@@ -1,34 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_colors.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_strings.dart';
+import 'package:flutter_clean_arc_example/core/widgets/error_widget.dart';
+import 'package:flutter_clean_arc_example/features/random_quote/presentation/cubit/random_quote_cubit.dart';
+import 'package:flutter_clean_arc_example/features/random_quote/presentation/cubit/random_quote_state.dart';
 import 'package:flutter_clean_arc_example/features/random_quote/presentation/widgets/quate_content.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class QuateScreen extends StatelessWidget {
-  const QuateScreen({Key? key}) : super(key: key);
+class QuateScreen extends StatefulWidget {
+  const QuateScreen({super.key});
 
-  Widget _buildBodyContent(){
-    return Column(
-      children: [
-        const QuateContent(),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 15),
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.primary
+  @override
+  State<QuateScreen> createState() => _QuateScreenState();
+}
+
+class _QuateScreenState extends State<QuateScreen> {
+
+  Widget buildBodyContent(){
+    return BlocBuilder<RandomQuoteCubit , RandomQuoteState>(builder: (context , state){
+      if(state is RandomQuoteIsLoading){
+        return Center(
+          child: SpinKitFadingCircle(
+            color: AppColors.primary,
           ),
-          child: const Icon(Icons.refresh , size: 28 , color: Colors.white,),
-        )
-      ],
-    );
+        );
+      } else if(state is RandomQuoteError){
+        return ErrorrWidget(onTap: (){});
+      } else if(state is RandomQuoteLoaded){
+        return Column(
+          children: [
+            QuateContent(quote: state.quote),
+            InkWell(
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.primary
+                ),
+                child: const Icon(Icons.refresh , size: 28 , color: Colors.white,),
+              ),
+              onTap: ()=>getData(),
+            )
+          ],
+        );
+      } else {
+        return Center(
+          child: SpinKitFadingCircle(
+            color: AppColors.primary,
+          ),
+        );
+      }
+    });
   }
+
+  getData() =>BlocProvider.of<RandomQuoteCubit>(context).getRandomQuote();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return RefreshIndicator(child: Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.appBarName),
       ),
-      body: _buildBodyContent(),
-    );
+      body: buildBodyContent(),
+    ), onRefresh: ()=>getData());
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_colors.dart';
+import 'package:flutter_clean_arc_example/features/random_quote/domain/entities/quate.dart';
 
 class QuateContent extends StatelessWidget {
-  const QuateContent({Key? key}) : super(key: key);
+  final Quote quote;
+  const QuateContent({Key? key, required this.quote}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class QuateContent extends StatelessWidget {
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(22)
       ),
-      child: Text('Hello , This is an app to build an example of clean arch using flutter framework', textAlign: TextAlign.center , style: Theme.of(context).textTheme.bodyMedium,),
+      child: Text(quote.body, textAlign: TextAlign.center , style: Theme.of(context).textTheme.bodyMedium,),
     );
   }
 }
