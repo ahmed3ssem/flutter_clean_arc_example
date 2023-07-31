@@ -73,43 +73,10 @@ class DioConsumer implements ApiConsumer{
   }
 
   dynamic handleDioError(DioException error) {
-    switch (error.response?.statusCode) {
-      case StatusCode.badRequest:
-        throw const BadRequestException();
-      case StatusCode.unauthorized:
-      case StatusCode.forBidden:
-        throw  const UnauthorizedException();
-      case StatusCode.notFound:
-        throw const NotFoundException();
-      case StatusCode.conflict:
-        throw const ConflictException();
-      case StatusCode.internalServerError:
-        throw const InternalServerErrorException();
-    }
-  }
-
-  dynamic _handleDioError(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-      case DioErrorType.response:
-        switch (error.response?.statusCode) {
-          case StatusCode.badRequest:
-            throw const BadRequestException();
-          case StatusCode.unauthorized:
-          case StatusCode.forBidden:
-            throw const UnauthorizedException();
-          case StatusCode.notFound:
-            throw const NotFoundException();
-          case StatusCode.conflict:
-            throw const ConflictException();
-          case StatusCode.internalServerError:
-            throw const InternalServerErrorException();
-          default:
-            throw const BadResponseException(); // Add a default case for unhandled response codes
-        }
-        break;
       case DioExceptionType.cancel:
         break;
       case DioExceptionType.badCertificate:
@@ -120,6 +87,21 @@ class DioConsumer implements ApiConsumer{
         throw const ConnectionErrorException();
       case DioExceptionType.unknown:
         throw const UnknownDioErrorException();
+    }
+    switch (error.response?.statusCode) {
+      case StatusCode.badRequest:
+        throw const BadRequestException();
+      case StatusCode.unauthorized:
+      case StatusCode.forBidden:
+        throw const UnauthorizedException();
+      case StatusCode.notFound:
+        throw const NotFoundException();
+      case StatusCode.conflict:
+        throw const ConflictException();
+      case StatusCode.internalServerError:
+        throw const InternalServerErrorException();
+      default:
+        throw const BadResponseException(); // Add a default case for unhandled response codes
     }
   }
 
