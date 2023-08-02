@@ -5,7 +5,6 @@ import 'package:flutter_clean_arc_example/core/usecase/usecase.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_strings.dart';
 import 'package:flutter_clean_arc_example/features/splash/domain/usecases/change_language.dart';
 import 'package:flutter_clean_arc_example/features/splash/domain/usecases/get_saved_lang.dart';
-
 part 'local_state.dart';
 
 class LocalCubit extends Cubit<LocalState> {
@@ -31,6 +30,7 @@ class LocalCubit extends Cubit<LocalState> {
     final response = await changeLanguageUseCase.call(langCode);
     response.fold((failure) => debugPrint(AppStrings.cacheError), (value) {
       currentLangCode = langCode;
+      debugPrint(currentLangCode);
       emit(ChangeLocalState(Locale(currentLangCode)));
     });
   }

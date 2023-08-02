@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_arc_example/config/local/app_localizations.dart';
 import 'package:flutter_clean_arc_example/core/utils/app_colors.dart';
-import 'package:flutter_clean_arc_example/core/utils/app_strings.dart';
 import 'package:flutter_clean_arc_example/core/widgets/error_widget.dart';
 import 'package:flutter_clean_arc_example/features/random_quote/presentation/cubit/random_quote_cubit.dart';
 import 'package:flutter_clean_arc_example/features/random_quote/presentation/cubit/random_quote_state.dart';
 import 'package:flutter_clean_arc_example/features/random_quote/presentation/widgets/quate_content.dart';
+import 'package:flutter_clean_arc_example/features/splash/presentation/cubit/local_cubit.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class QuateScreen extends StatefulWidget {
@@ -68,7 +69,17 @@ class _QuateScreenState extends State<QuateScreen> {
   Widget build(BuildContext context) {
     return RefreshIndicator(child: Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.appBarName),
+        title: Text(AppLocalizations.of(context)!.translate('app_name')!),
+        leading: IconButton(
+          icon: Icon(Icons.translate_outlined , color: AppColors.primary,),
+          onPressed: () {
+            if (AppLocalizations.of(context)!.isEnLocale) {
+              BlocProvider.of<LocalCubit>(context).toArabic();
+              debugPrint('Hadeer');
+            } else {
+              BlocProvider.of<LocalCubit>(context).toEnglish();
+            }}
+        )
       ),
       body: buildBodyContent(),
     ), onRefresh: ()=>getData());
